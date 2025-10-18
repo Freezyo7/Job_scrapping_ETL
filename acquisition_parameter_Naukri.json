@@ -1,0 +1,41 @@
+{
+    "file_location" : "/opt/airflow/webscrap/output/",
+    "file_name" : "naukri",
+    "file_extension" : ".csv",
+
+    "column_no" : [20],
+    "schema" : {
+        "job_title" : "object", 
+        "job_link": "object", 
+        "company_name": "object", 
+        "company_rating": "float64",
+        "experience": "object", 
+        "salary" : "object", 
+        "location": "object", 
+        "posted": "object", 
+        "openings": "float64",
+        "applicants" : "object", 
+        "job_description" : "object", 
+        "job_role" : "object", 
+        "industry_type" : "object", 
+        "department" : "object", 
+        "employment_type": "object", 
+        "role_category" : "object",
+        "skill" : "object",
+        "logo_link" : "object",
+        "scrapped_at" : "datetime",
+        "domain" : "object"
+        },
+    
+    "validation_rules": {
+        "null_fail": ["company_name", "job_link"],
+        "null_ignore": "all_other_columns"
+        },
+    
+    "storing_loc" : "Job_data/Input/raw_file/Naukri/{processing_week}/",
+    "storing_file_name" : "naukri_job_scrap_{today}.csv",
+
+    "no_of_fields_check" : "true",
+    "p_missing_check" : "true", 
+    "p_validate_schema" : "{'schema_check' : 'true', 'check_type': 'fields' }"
+}

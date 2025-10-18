@@ -1,0 +1,40 @@
+{
+    "file_location" : "/opt/airflow/webscrap/output/",
+    "file_name" : "linkedin_jobs2",
+    "file_extension" : ".csv",
+
+    "column_no" : [19],
+    "schema" : {
+        "company_name" : "object", 
+        "company_page_link": "object", 
+        "company_logo": "object", 
+        "job_title": "object",
+        "job_link": "object", 
+        "job_location" : "object", 
+        "posted_date": "object", 
+        "applicants": "object", 
+        "job_priority": "object",
+        "application_status" : "object", 
+        "salary" : "object",
+        "job_type" : "object", 
+        "job_working_des" : "object", 
+        "company_sector" : "object", 
+        "company_total_employee" : "object", 
+        "company_employee_on_linkedin" : "object", 
+        "jd" : "object",
+        "scrapped_at": "datetime", 
+        "domain" : "object"
+        },
+    
+    "validation_rules": {
+        "null_fail": ["company_name", "job_link"],
+        "null_ignore": "all_other_columns"
+        },
+    
+    "storing_loc" : "Job_data/Input/raw_file/Linkedin/{processing_week}/",
+    "storing_file_name" : "linkedin_job_scrap_{today}.csv",
+
+    "no_of_fields_check" : "true",
+    "p_missing_check" : "true", 
+    "p_validate_schema" : "{'schema_check' : 'true', 'check_type': 'fields' }"
+}

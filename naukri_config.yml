@@ -1,0 +1,57 @@
+configuration:
+  - output_file_location:
+      aws_conn_id: 'webscrap_bucket_s3_conn'
+      bucket_name: 'webscrap-bucket-store'
+      file_path: 'naukri_data/output/[processing_week]/'
+      file_name: 'naukri_data_[current_date].csv'
+
+  - postgres_schema:
+      connection_id: 'supa_conn'
+      database: 'postgres'
+      table: 'naukri_csv_data'
+      schema:
+        - name: job_title
+          type: TEXT
+        - name: job_link
+          type: TEXT
+        - name: company_name
+          type: TEXT
+        - name: company_rating
+          type: TEXT
+        - name: experience
+          type: TEXT
+        - name: salary
+          type: TEXT
+        - name: location
+          type: TEXT
+        - name: posted
+          type: TEXT
+        - name: openings
+          type: TEXT
+        - name: applicants
+          type: TEXT
+        - name: job_description
+          type: TEXT
+        - name: job_role
+          type: TEXT
+        - name: industry_type
+          type: TEXT
+        - name: department
+          type: TEXT
+        - name: employment_type
+          type: TEXT
+        - name: role_category
+          type: TEXT
+        - name: skill
+          type: TEXT
+        - name: logo_link
+          type: TEXT
+        - name: scrapped_at
+          type: TEXT
+        - name: domain
+          type: TEXT
+
+  - upsert:
+      type: upsert
+      conflict_keys: [job_link]
+      update_columns: ['salary', 'posted', 'applicants']

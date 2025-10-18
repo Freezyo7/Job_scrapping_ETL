@@ -1,0 +1,15 @@
+transform_rules:
+  - add_dataframe:
+      add_dataframe: 'df_Linkedin_data'
+      file_path: 'Job_data/Input/raw_file/Linkedin/{processing_week}/'
+      file_name_hint: 'linkedin_job_scrap'
+      file_extension: '.csv'
+      get_source_file_name: 'True'
+      get_source_file_date: 'True'
+
+  - dropna:
+      dataframe: 'df_Linkedin_data'
+      how: "any"
+      subset: [job_title, job_link]
+  
+  - 

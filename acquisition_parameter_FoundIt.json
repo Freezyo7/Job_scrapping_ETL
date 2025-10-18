@@ -1,0 +1,38 @@
+{
+    "file_location" : "/opt/airflow/webscrap/output/",
+    "file_name" : "foundit_job",
+    "file_extension" : ".csv",
+
+    "column_no" : [17],
+    "schema" : {
+        "job_title" : "object", 
+        "job_link": "object", 
+        "logo_link" : "object",
+        "company_name": "object", 
+        "company_link": "object",
+        "posted_info": "object", 
+        "salary" : "object", 
+        "experience": "object",
+        "location": "object", 
+        "skill": "object", 
+        "apply_link": "object",
+        "jd" : "object", 
+        "industry" : "object", 
+        "job_role" : "object", 
+        "job_type" : "object", 
+        "scrapped_at" : "datetime",
+        "domain" : "object"
+        },
+    
+    "validation_rules": {
+        "null_fail": ["company_name", "job_link", "job_name"],
+        "null_ignore": "all_other_columns"
+        },
+    
+    "storing_loc" : "Job_data/Input/raw_file/FoundIt/{processing_week}/",
+    "storing_file_name" : "foundit_job_scrap_{today}.csv",
+
+    "no_of_fields_check" : "true",
+    "p_missing_check" : "true", 
+    "p_validate_schema" : "{'schema_check' : 'true', 'check_type': 'fields' }"
+}
