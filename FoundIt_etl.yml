@@ -1,0 +1,89 @@
+transform_rules:
+  - add_dataframe:
+      dataframe: 'df_FoundIt_data'
+      file_path: 'Job_data/Input/raw_file/FoundIt/{processing_week}/'
+      file_name_hint: 'foundit_job_scrap'
+      file_extension: '.csv'
+      get_source_file_name: 'True'
+      get_source_file_date: 'True'
+
+  - dropna:
+      dataframe: 'df_FoundIt_data'
+      how: "any"
+      axis: 0
+      subset: [job_title, job_link]
+
+  - date_formatting:
+      dataframe: 'df_FoundIt_data'
+      columns:
+      - source: scrapped_at
+        target: scrapped_at
+        input_format: "%Y:%m:%d"
+        output_format: "%B %d, %Y"
+  
+  - type_casting:
+      dataframe: 'df_FoundIt_data'
+      dtype_mapping:
+        job_title: "string"
+        job_link: "string"
+        logo_link: "string"
+        company_name: "string"
+        company_link: "string"
+        posted_info: "string"
+        applicant: "string"
+        location: "string"
+        jd: "string"
+        job_working_des: "string"
+        industry_type: "string"
+        job_type: "string"
+        domain: "string"
+
+  - handle_missing:
+      dataframe: 'df_FoundIt_data'
+      method: fill
+      fill_value:
+        industry_type: "other"
+        job_type: "Not_disclose"
+        
+  - drop_columns:
+      dataframe: 'df_FoundIt_data'
+      columns:
+        experience
+        skill
+        apply_link
+
+  - drop_duplicate:
+      dataframe: 'df_FoundIt_data'
+      keep: 'first'
+      subset: [job_title, job_link]
+
+  - renaming_columns:
+      dataframe: 'df_FoundIt_data'
+      columns:
+        logo_link: company_logo_link
+        company_link: company_page_link
+        posted_info: posted_date
+        applicant: applicants
+        location: job_location
+        jd: job_description
+        industry_type: company_sector
+        scrapped_at: extracted_time
+  
+  - reorder_columns:
+      dataframe: 'df_FoundIt_data'
+      columns:
+      - job_title
+      - job_location
+      - job_link
+      - company_name
+      - company_page_link
+      - company_logo_link
+      - posted_date
+      - applicants
+      - company_sector
+      - job_type
+      - job_working_des
+      - job_description
+      - extracted_time
+      - domain 
+         

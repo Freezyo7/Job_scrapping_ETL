@@ -1,0 +1,42 @@
+configuration:
+  - output_file_location:
+      aws_conn_id: "webscrap_bucket_s3_conn"
+      bucket_name: "webscrap-bucket-store"
+      file_path: "Job_data/Output/"
+      file_name: "all_job_data.csv"
+
+  - postgres_schema:
+      connection_id: 'supa_conn'
+      database: 'postgres'
+      table: 'job_listing_tbl'
+      schema:
+        - name: job_title
+          type: TEXT
+        - name: job_location
+          type: TEXT
+        - name: job_link
+          type: TEXT
+        - name: company_name
+          type: TEXT
+        - name: company_page_link
+          type: TEXT
+        - name: company_logo_link
+          type: TEXT
+        - name: posted_date
+          type: TEXT
+        - name: applicants
+          type: TEXT
+        - name: company_sector
+          type: TEXT
+        - name: job_type
+          type: TEXT
+        - name: job_working_des
+          type: TEXT
+        - name: job_description
+          type: TEXT
+        - name: extracted_time
+          type: TEXT
+        - name: domain
+          type: TEXT
+        - name: source_dataset
+          type: TEXT

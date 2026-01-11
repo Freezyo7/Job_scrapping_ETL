@@ -1,0 +1,92 @@
+transform_rules:
+  - add_dataframe:
+      dataframe: 'df_Naukri_data'
+      file_path: 'Job_data/Input/raw_file/Naukri/{processing_week}/'
+      file_name_hint: 'naukri_job_scrap'
+      file_extension: '.csv'
+      get_source_file_name: 'True'
+      get_source_file_date: 'True'
+    
+  - dropna:
+      dataframe: 'df_Naukri_data'
+      how: "any"
+      axis: 0
+      subset: [industry_type, job_working_des, job_type]
+  
+  - date_formatting:
+      dataframe: 'df_Naukri_data'
+      columns:
+      - source: scrapped_at
+        target: scrapped_at
+        input_format: "%Y:%m:%d"
+        output_format: "%B %d, %Y"
+  
+  - type_casting:
+      dataframe: 'df_Naukri_data'
+      dtype_mapping:
+        job_title: "string"
+        job_link: "string"
+        company_name: "string"
+        company_page_link: "string"
+        logo_link: "string"
+        location: "string"
+        posted: "string"
+        applicants: "string"
+        job_description: "string"
+        job_working_des: "string"
+        job_type: "string"
+        industry_type: "string"
+        domain: "string"
+
+  - handle_missing:
+      dataframe: 'df_Naukri_data'
+      method: fill
+      fill_value:
+        industry_type: "other"
+        job_type: "Not_disclose"
+        job_working_des: "Not_disclose"
+
+  - drop_columns:
+      dataframe: 'df_Naukri_data'
+      columns:
+        company_rating
+        experience
+        salary
+        openings
+        job_role
+        department
+        role_category
+        skill
+
+  - drop_duplicate:
+      dataframe: 'df_Naukri_data'
+      keep: 'first'
+      subset: [job_title, job_link]
+  
+  - renaming_columns:
+      dataframe: 'df_Naukri_data'
+      columns:
+        location: job_location
+        logo_link: company_logo_link
+        posted: posted_date
+        industry_type: company_sector
+        scrapped_at: extracted_time
+
+  - reorder_columns:
+      dataframe: 'df_Naukri_data'
+      columns:
+      - job_title
+      - job_location
+      - job_link
+      - company_name
+      - company_page_link
+      - company_logo_link
+      - posted_date
+      - applicants
+      - company_sector
+      - job_type
+      - job_working_des
+      - job_description
+      - extracted_time
+      - domain
+
